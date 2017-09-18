@@ -1,3 +1,3 @@
-require "./jb-episode-api"
+require "./jb-show-api"
 
 run Cuba
