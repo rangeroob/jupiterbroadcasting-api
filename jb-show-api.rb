@@ -103,6 +103,26 @@ LinuxUnplugged.define do
   end
 end
 
+class SciByte < Cuba; end
+SciByte.define do
+  on get do
+    on root do
+      url = 'http://feeds.feedburner.com/scibyteaudio'
+      open(url) do |rss|
+        hash = Hash.new(0)
+        feed = RSS::Parser.parse(rss)
+        feed.items.each.reverse_each do |item|
+          scibytedata = { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
+                          link: item.enclosure.url, desc: item.description }
+          scibytejson = JSON.pretty_generate scibytedata
+          res.headers['Content-Type'] = 'application/json; charset=utf-8'
+          res.write(scibytejson)
+        end
+      end
+    end
+  end
+end
+
 class TechSnap < Cuba; end
 TechSnap.define do
   on get do
@@ -170,29 +190,36 @@ Cuba.define do
   on get do
     on 'api' do
       on 'jupiterbroadcasting' do
-        on 'asknoah' do
-          run AskNoah
+        on 'current' do
+          on 'asknoah' do
+            run AskNoah
+          end
+          on 'bsdnow' do
+            run BSDNow
+          end
+          on 'coderradio' do
+            run CoderRadio
+          end
+          on 'linuxactionnews' do
+            run LinuxActionNews
+          end
+          on 'linuxunplugged' do
+            run LinuxUnplugged
+          end
+          on 'techsnap' do
+            run TechSnap
+          end
+          on 'unfilter' do
+            run Unfilter
+          end
+          on 'usererror' do
+            run UserError
+          end
         end
-        on 'bsdnow' do
-          run BSDNow
-        end
-        on 'coderradio' do
-          run CoderRadio
-        end
-        on 'linuxactionnews' do
-          run LinuxActionNews
-        end
-        on 'linuxunplugged' do
-          run LinuxUnplugged
-        end
-        on 'techsnap' do
-          run TechSnap
-        end
-        on 'unfilter' do
-          run Unfilter
-        end
-        on 'usererror' do
-          run UserError
+        on 'archive' do
+          on 'scibyte' do
+            run SciByte
+          end
         end
       end
     end
