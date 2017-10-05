@@ -1,11 +1,16 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    clap (1.0.0)
     cuba (3.8.1)
       rack (>= 1.6.0)
+    cutest (1.2.3)
+      clap
     daemons (1.2.4)
     eventmachine (1.2.5)
     rack (2.0.3)
+    rack-test (0.7.0)
+      rack (>= 1.0, < 3)
     thin (1.7.2)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -16,6 +21,8 @@ PLATFORMS
 
 DEPENDENCIES
   cuba
+  cutest
+  rack-test
   thin
 
 BUNDLED WITH
