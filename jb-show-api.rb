@@ -166,10 +166,7 @@ end
 class UserError < Cuba; end
 UserError.define do
   on get do
-    on root, param('e') do |e|
-      res.write(e)
-    end
-    on true do
+    on root do
       url = 'http://feedpress.me/usererror'
       open(url) do |rss|
         hash = Hash.new(0)
