@@ -1,5 +1,5 @@
 
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 group 'production' do
   gem 'cuba'
