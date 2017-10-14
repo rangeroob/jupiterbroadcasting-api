@@ -3,180 +3,25 @@ require 'json'
 require 'rss'
 require 'open-uri'
 
-class AskNoah < Cuba; end
-AskNoah.define do
-  on get do
-    on root do
-      url = 'http://asknoah.fireside.fm/rss'
-      open(url) do |rss|
-        hash = Hash.new(-1)
-        feed = RSS::Parser.parse(rss)
-        feed.items.each.reverse_each do |item|
-          asknoahdata = { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
-                          link: item.enclosure.url, desc: item.description }
-          asknoahjson = JSON.pretty_generate asknoahdata
-          res.headers['Content-Type'] = 'application/json; charset=utf-8'
-          res.write(asknoahjson)
-        end
-      end
-    end
-  end
-end
+class ShowAddress < Cuba; end
 
-class BSDNow < Cuba; end
-BSDNow.define do
-  on get do
-    on root do
-      url = 'http://feeds.feedburner.com/BsdNowMp3?format=xml'
-      open(url) do |rss|
-        hash = Hash.new(0)
-        feed = RSS::Parser.parse(rss)
-        feed.items.each.reverse_each do |item|
-          bsdnowdata = { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
-                         link: item.enclosure.url, desc: item.description }
-          bsdnowjson = JSON.pretty_generate bsdnowdata
-          res.headers['Content-Type'] = 'application/json; charset=utf-8'
-          res.write(bsdnowjson)
-        end
-      end
-    end
-  end
-end
+public
 
-class CoderRadio < Cuba; end
-CoderRadio.define do
-  on get do
-    on root do
-      url = 'http://feeds.feedburner.com/coderradiomp3?format=xml'
-      open(url) do |rss|
-        hash = Hash.new(54)
-        feed = RSS::Parser.parse(rss)
-        feed.items.each.reverse_each do |item|
-          coderradiodata = { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
-                             link: item.enclosure.url, desc: item.description }
-          coderradiojson = JSON.pretty_generate coderradiodata
-          res.headers['Content-Type'] = 'application/json; charset=utf-8'
-          res.write(coderradiojson)
-        end
-      end
-    end
-  end
-end
-
-class LinuxActionNews < Cuba; end
-LinuxActionNews.define do
-  on get do
-    on root do
-      url = 'http://linuxactionnews.com/rss'
-      open(url) do |rss|
-        hash = Hash.new(-1)
-        feed = RSS::Parser.parse(rss)
-        feed.items.each.reverse_each do |item|
-          linuxactionnewsdata = { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
-                                  link: item.enclosure.url, desc: item.description }
-          linuxactionnewsjson = JSON.pretty_generate linuxactionnewsdata
-          res.headers['Content-Type'] = 'application/json; charset=utf-8'
-          res.write(linuxactionnewsjson)
-        end
-      end
-    end
-  end
-end
-
-class LinuxUnplugged < Cuba; end
-LinuxUnplugged.define do
-  on get do
-    on root do
-      url = 'http://feeds.feedburner.com/linuxunplugged'
-      open(url) do |rss|
-        hash = Hash.new(0)
-        feed = RSS::Parser.parse(rss)
-        feed.items.each.reverse_each do |item|
-          linuxunpluggeddata = { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
-                                 link: item.enclosure.url, desc: item.description }
-          linuxunpluggedjson = JSON.pretty_generate linuxunpluggeddata
-          res.headers['Content-Type'] = 'application/json; charset=utf-8'
-          res.write(linuxunpluggedjson)
-        end
-      end
-    end
-  end
-end
-
-class SciByte < Cuba; end
-SciByte.define do
-  on get do
-    on root do
-      url = 'http://feeds.feedburner.com/scibyteaudio'
-      open(url) do |rss|
-        hash = Hash.new(0)
-        feed = RSS::Parser.parse(rss)
-        feed.items.each.reverse_each do |item|
-          scibytedata = { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
-                          link: item.enclosure.url, desc: item.description }
-          scibytejson = JSON.pretty_generate scibytedata
-          res.headers['Content-Type'] = 'application/json; charset=utf-8'
-          res.write(scibytejson)
-        end
-      end
-    end
-  end
-end
-
-class TechSnap < Cuba; end
-TechSnap.define do
-  on get do
-    on root do
-      url = 'http://feeds.feedburner.com/techsnapmp3'
-      open(url) do |rss|
-        hash = Hash.new(190)
-        feed = RSS::Parser.parse(rss)
-        feed.items.each.reverse_each do |item|
-          techsnapdata = { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
-                           link: item.enclosure.url, desc: item.description }
-          techsnapjson = JSON.pretty_generate techsnapdata
-          res.headers['Content-Type'] = 'application/json; charset=utf-8'
-          res.write(techsnapjson)
-        end
-      end
-    end
-  end
-end
-
-class Unfilter < Cuba; end
-Unfilter.define do
-  on get do
-    on root do
-      url = 'http://feeds.feedburner.com/jupiterbroadcasting/unfiltermp3'
-      open(url) do |rss|
-        hash = Hash.new(39)
-        feed = RSS::Parser.parse(rss)
-        feed.items.each.reverse_each do |item|
-          unfilterdata = { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
-                           link: item.enclosure.url, desc: item.description }
-          unfilterjson = JSON.pretty_generate unfilterdata
-          res.headers['Content-Type'] = 'application/json; charset=utf-8'
-          res.write(unfilterjson)
-        end
-      end
-    end
-  end
-end
-
-class UserError < Cuba; end
-UserError.define do
-  on get do
-    on root do
-      url = 'http://feedpress.me/usererror'
-      open(url) do |rss|
-        hash = Hash.new(0)
-        feed = RSS::Parser.parse(rss)
-        feed.items.each.reverse_each do |item|
-          usererrordata = { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
-                            link: item.enclosure.url, desc: item.description }
-          usererrorjson = JSON.pretty_generate usererrordata
-          res.headers['Content-Type'] = 'application/json; charset=utf-8'
-          res.write(usererrorjson)
+def get(address, hash_number)
+  ShowAddress.define do
+    on get do
+      on root do
+        url = address
+        open(url) do |rss|
+          hash = Hash.new(hash_number)
+          feed = RSS::Parser.parse(rss)
+          feed.items.each.reverse_each do |item|
+            data = { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
+                     link: item.enclosure.url, desc: item.description }
+            json = JSON.pretty_generate data
+            res.headers['Content-Type'] = 'application/json; charset=utf-8'
+            res.write(json)
+          end
         end
       end
     end
@@ -189,33 +34,33 @@ Cuba.define do
       on 'jupiterbroadcasting' do
         on 'current' do
           on 'asknoah' do
-            run AskNoah
+            run ShowAddress.get('http://asknoah.fireside.fm/rss', '-1'.to_i)
           end
           on 'bsdnow' do
-            run BSDNow
+            run ShowAddress.get('http://feeds.feedburner.com/BsdNowMp3?format=xml', '0'.to_i)
           end
           on 'coderradio' do
-            run CoderRadio
+            run ShowAddress.get('http://feeds.feedburner.com/coderradiomp3?format=xml', '54'.to_i)
           end
           on 'linuxactionnews' do
-            run LinuxActionNews
+            run ShowAddress.get('http://linuxactionnews.com/rss', '-1'.to_i)
           end
           on 'linuxunplugged' do
-            run LinuxUnplugged
+            run ShowAddress.get('http://feeds.feedburner.com/linuxunplugged', '0'.to_i)
           end
           on 'techsnap' do
-            run TechSnap
+            run ShowAddress.get('http://feeds.feedburner.com/techsnapmp3', '190'.to.i)
           end
           on 'unfilter' do
-            run Unfilter
+            run ShowAddress.get('http://feeds.feedburner.com/jupiterbroadcasting/unfiltermp3', '39'.to_i)
           end
           on 'usererror' do
-            run UserError
+            run ShowAddress.get('http://feedpress.me/usererror', '0'.to_i)
           end
         end
         on 'archive' do
           on 'scibyte' do
-            run SciByte
+            run ShowAddress.get('http://feeds.feedburner.com/scibyteaudio', '0'.to_i)
           end
         end
       end
