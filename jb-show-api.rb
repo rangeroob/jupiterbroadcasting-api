@@ -16,11 +16,11 @@ def get(address, hash_number)
           hash = Hash.new(hash_number)
           feed = RSS::Parser.parse(rss)
           feed.items.each.reverse_each do |item|
-            usererrordata = { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
-                              link: item.enclosure.url, desc: item.description }
-            usererrorjson = JSON.pretty_generate usererrordata
+            data = { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
+                     link: item.enclosure.url, desc: item.description }
+            json = JSON.pretty_generate data
             res.headers['Content-Type'] = 'application/json; charset=utf-8'
-            res.write(usererrorjson)
+            res.write(json)
           end
         end
       end
