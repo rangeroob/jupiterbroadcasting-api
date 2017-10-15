@@ -11,13 +11,20 @@ def get(address, hash_number)
   ShowAddress.define do
     on get do
       on root do
-        url = address
-        open(url) do |rss|
+        begin
+          url = address
+          open(url)
+        rescue OpenURI::HTTPError
+          failuredata = { status: 'failure', data: { message: 'failed to retrieve data' } }
+          failurejson = JSON.pretty_generate failuredata
+          res.headers['Content-Type'] = 'application/json; charset=utf-8'
+          res.write(failurejson)
+        else
           hash = Hash.new(hash_number)
-          feed = RSS::Parser.parse(rss)
+          feed = RSS::Parser.parse(url)
           feed.items.each.reverse_each do |item|
-            data = { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
-                     link: item.enclosure.url, desc: item.description }
+            data = { status: 'success', data: { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
+                                                link: item.enclosure.url, desc: item.description } }
             json = JSON.pretty_generate data
             res.headers['Content-Type'] = 'application/json; charset=utf-8'
             res.write(json)
