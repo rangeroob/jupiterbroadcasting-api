@@ -11,22 +11,25 @@ def get(address, hash_number)
   ShowAddress.define do
     on get do
       on root do
+        res.headers['Content-Type'] = 'application/json; charset=utf-8'
         begin
           url = address
           open(url)
         rescue OpenURI::HTTPError
-          failuredata = { status: 'failure', data: { message: 'failed to retrieve data' } }
+          failuredata = { status: 'fail',
+                          data: { message: 'failed to retrieve data' } }
           failurejson = JSON.pretty_generate failuredata
-          res.headers['Content-Type'] = 'application/json; charset=utf-8'
           res.write(failurejson)
         else
           hash = Hash.new(hash_number)
           feed = RSS::Parser.parse(url)
           feed.items.each.reverse_each do |item|
-            data = { status: 'success', data: { id: hash[:id] += 1, title: item.title, pubDate: item.pubDate,
-                                                link: item.enclosure.url, desc: item.description } }
+            data = { status: 'success', data: { id: hash[:id] += 1,
+                                                title: item.title,
+                                                pubDate: item.pubDate,
+                                                link: item.enclosure.url,
+                                                desc: item.description } }
             json = JSON.pretty_generate data
-            res.headers['Content-Type'] = 'application/json; charset=utf-8'
             res.write(json)
           end
         end
@@ -44,22 +47,27 @@ Cuba.define do
             run ShowAddress.get('http://asknoah.fireside.fm/rss', '-1'.to_i)
           end
           on 'bsdnow' do
-            run ShowAddress.get('http://feeds.feedburner.com/BsdNowMp3?format=xml', '0'.to_i)
+            run ShowAddress.get('http://feeds.feedburner.com/BsdNowMp3?format=xml',
+                                '0'.to_i)
           end
           on 'coderradio' do
-            run ShowAddress.get('http://feeds.feedburner.com/coderradiomp3?format=xml', '54'.to_i)
+            run ShowAddress.get('http://feeds.feedburner.com/coderradiomp3?format=xml',
+                                '54'.to_i)
           end
           on 'linuxactionnews' do
             run ShowAddress.get('http://linuxactionnews.com/rss', '-1'.to_i)
           end
           on 'linuxunplugged' do
-            run ShowAddress.get('http://feeds.feedburner.com/linuxunplugged', '0'.to_i)
+            run ShowAddress.get('http://feeds.feedburner.com/linuxunplugged',
+                                '0'.to_i)
           end
           on 'techsnap' do
-            run ShowAddress.get('http://feeds.feedburner.com/techsnapmp3', '190'.to.i)
+            run ShowAddress.get('http://feeds.feedburner.com/techsnapmp3',
+                                '190'.to.i)
           end
           on 'unfilter' do
-            run ShowAddress.get('http://feeds.feedburner.com/jupiterbroadcasting/unfiltermp3', '39'.to_i)
+            run ShowAddress.get('http://feeds.feedburner.com/jupiterbroadcasting/unfiltermp3',
+                                '39'.to_i)
           end
           on 'usererror' do
             run ShowAddress.get('http://feedpress.me/usererror', '0'.to_i)
@@ -67,7 +75,8 @@ Cuba.define do
         end
         on 'archive' do
           on 'scibyte' do
-            run ShowAddress.get('http://feeds.feedburner.com/scibyteaudio', '0'.to_i)
+            run ShowAddress.get('http://feeds.feedburner.com/scibyteaudio',
+                                '0'.to_i)
           end
         end
       end
