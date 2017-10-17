@@ -81,6 +81,9 @@ Cuba.define do
           on 'womenstechradio' do
             run ShowAddress.get('http://feeds.feedburner.com/wtrmp3?format=xml', '0'.to_i)
           end
+          on 'techtalktoday' do
+            run ShowAddress.get('http://feedpress.me/t3mp3','153'.to_i)
+          end
         end
       end
     end
