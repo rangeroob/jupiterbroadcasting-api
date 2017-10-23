@@ -2,8 +2,9 @@
 source 'https://rubygems.org'
 
 group 'production' do
-  gem 'cuba'
-  gem 'thin'
+  gem 'activesupport', '>=5.1.0'
+  gem 'cuba', '>=3.8'
+  gem 'thin', '>=1.7.1'
 end
 
 group 'test' do
