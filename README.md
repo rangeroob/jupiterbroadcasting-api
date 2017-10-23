@@ -1,6 +1,6 @@
 # Jupiterbroadcasting-api
 
-An API that interfaces with Jupiterbroadcasting's XML feeds and converts them into JSON for easy consumption.
+An API that interfaces with Jupiterbroadcasting's RSS feeds and converts them into JSON for easy consumption.
 
 ## Getting Started
 
@@ -11,23 +11,34 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them
 
 ```
-Give examples
+gem install bundler
 ```
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
+First clone this repository
 ```
-Give the example
+Git clone https://github.com/rangeroob/jupiterbroadcasting-api.git
 ```
 
-And repeat
-
+Next change current directory
 ```
-until finished
+cd jupiterbroadcastin-api
+```
+
+Then install all dependencies
+```
+bundle install
+```
+
+After that run rackup
+```
+rackup
+```
+
+Lastly go to localhost:9292 ex:
+```
+curl localhost:9292/api/jupiterbroadcasting/current/bsdnow
 ```
 
 End with an example of getting some data out of the system or using it for a little demo
@@ -58,11 +69,14 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Cuba](https://github.com/soveran/cuba)
+ [Cuba](https://github.com/soveran/cuba)
+
+[Active Support](https://github.com/rails/rails/tree/master/activesupport)
 
 ## Tested With
-
-* [Rack-Test](https://github.com/rack-test/rack-test) & [Cutest](https://github.com/djanowski/cutest)
+ [Rack-Test](https://github.com/rack-test/rack-test)
+ 
+ [Cutest](https://github.com/djanowski/cutest)
 
 
 ## Contributing
