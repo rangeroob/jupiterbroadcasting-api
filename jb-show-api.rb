@@ -1,8 +1,10 @@
-require 'cuba'
-require 'json'
-require 'rss'
-require 'net/http'
 require 'active_support/core_ext/hash'
+require 'cuba'
+require 'cuba/safe'
+require 'json'
+require 'net/http'
+
+Cuba.plugin Cuba::Safe
 
 class ShowAddress < Cuba; end
 
@@ -22,6 +24,12 @@ def get(address)
 end
 
 Cuba.define do
+  on csrf.unsafe? do
+    csrf.reset!
+    res.status = 403
+    res.write('Not authorized')
+    halt(res.finish)
+  end
   on get do
     on 'api' do
       on 'jupiterbroadcasting' do
