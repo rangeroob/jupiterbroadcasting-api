@@ -2,7 +2,7 @@ require 'active_support/core_ext/hash'
 require 'cuba'
 require 'cuba/safe'
 require 'json'
-require 'net/http'
+require 'open-uri'
 
 Cuba.plugin Cuba::Safe
 
@@ -15,9 +15,15 @@ def get(address)
     on get do
       on root do
         res.headers['Content-Type'] = 'application/json; charset=utf-8'
-        get_rss = Net::HTTP.get_response(URI.parse(address)).body
-        pretty_json = JSON.pretty_generate(Hash.from_xml(get_rss))
-        res.write(pretty_json)
+        begin
+          get_rss = open(address)
+        rescue OpenURI::HTTPError
+          http_error_hash = { status: 'fail', rss: 'failure to retrieve data' }
+          res.write(JSON.pretty_generate(http_error_hash))
+        else
+          pretty_json = JSON.pretty_generate(Hash.from_xml(get_rss))
+          res.write(pretty_json)
+        end
       end
     end
   end
@@ -35,7 +41,7 @@ Cuba.define do
       on 'jupiterbroadcasting' do
         on 'current' do
           on 'asknoah' do
-            run ShowAddress.get('https://asknoah.fireside.fm/rss')
+            run ShowAddress.get('http://asknoah.fireside.fm/rss')
           end
           on 'bsdnow' do
             run ShowAddress.get('http://feeds.feedburner.com/BsdNowMp3?format=xml')
