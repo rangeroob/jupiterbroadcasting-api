@@ -35,7 +35,7 @@ Cuba.define do
       on 'jupiterbroadcasting' do
         on 'current' do
           on 'asknoah' do
-            run ShowAddress.get('http://asknoah.fireside.fm/rss')
+            run ShowAddress.get('https://asknoah.fireside.fm/rss')
           end
           on 'bsdnow' do
             run ShowAddress.get('http://feeds.feedburner.com/BsdNowMp3?format=xml')
