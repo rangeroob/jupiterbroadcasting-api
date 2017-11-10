@@ -18,7 +18,7 @@ gem install bundler
 
 First clone this repository
 ```bash
-Git clone https://github.com/rangeroob/jupiterbroadcasting-api.git
+git clone https://github.com/rangeroob/jupiterbroadcasting-api.git
 ```
 
 Next change current directory
