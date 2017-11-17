@@ -1,6 +1,7 @@
 # Jupiterbroadcasting-api
 
 An API that interfaces with Jupiterbroadcasting's RSS feeds and converts them into JSON for easy consumption.
+It can be reached at ``` www.jupitercolony.rocks/api/jupiterbroadcasting/[current]or[archive]/[showname]```
 
 ## Getting Started
 
@@ -68,7 +69,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 **Derek Viera** - *Initial work* - [rangeroob](https://github.com/rangeroob)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/rangeroob/jupiterbroadcasting-api/contributors) who participated in this project.
 
 ## License
 

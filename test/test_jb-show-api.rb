@@ -38,6 +38,22 @@ scope do
     get '/api/jupiterbroadcasting/current/usererror'
     assert_equal 200, last_response.status
   end
+  test ' planb endpoint' do
+    get '/api/jupiterbroadcasting/archive/planb'
+    assert_equal 200, last_response.status
+  end
+  test 'fauxshow endpoint' do
+    get '/api/jupiterbroadcasting/archive/fauxshow'
+    assert_equal 200, last_response.status
+  end
+  test 'jupiter@nite endpoint' do
+    get '/api/jupiterbroadcasting/archive/jupiternite'
+    assert_equal 200, last_response.status
+  end
+  test 'mmorgue endpoint' do
+    get '/api/jupiterbroadcasting/archive/mmorgue'
+    assert_equal 200, last_response.status
+  end
   test 'scibyte endpoint' do
     get '/api/jupiterbroadcasting/archive/scibyte'
     assert_equal 200, last_response.status
@@ -50,8 +66,8 @@ scope do
     get '/api/jupiterbroadcasting/archive/techtalktoday'
     assert_equal 200, last_response.status
   end
-  test 'techtalktoday endpoint' do
-    get '/api/jupiterbroadcasting/archive/techtalktoday'
+  test 'torked endpoint' do
+    get '/api/jupiterbroadcasting/archive/torked'
     assert_equal 200, last_response.status
   end
   test 'womenstechradio endpoint' do

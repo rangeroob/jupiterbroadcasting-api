@@ -66,6 +66,18 @@ Cuba.define do
           end
         end
         on 'archive' do
+          on 'planb' do
+            run ShowAddress.get('http://feeds.feedburner.com/planbmp3')
+          end
+          on 'fauxshow' do
+            run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/FauxShowMP3.xml')
+          end
+          on 'jupiternite' do
+            run ShowAddress.get('http://feeds.feedburner.com/jupiternitemp3')
+          end
+          on 'mmorgue' do
+            run ShowAddress.get('http://feeds.feedburner.com/MMOrgueMP3')
+          end
           on 'scibyte' do
             run ShowAddress.get('http://feeds.feedburner.com/scibyteaudio')
           end
@@ -74,6 +86,9 @@ Cuba.define do
           end
           on 'techtalktoday' do
             run ShowAddress.get('http://feedpress.me/t3mp3')
+          end
+          on 'torked' do
+            run ShowAddress.get('http://feeds.feedburner.com/TorkedMp3')
           end
           on 'womenstechradio' do
             run ShowAddress.get('http://feeds.feedburner.com/wtrmp3?format=xml')
