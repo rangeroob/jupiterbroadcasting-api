@@ -54,8 +54,8 @@ scope do
     get '/api/jupiterbroadcasting/archive/techtalktoday'
     assert_equal 200, last_response.status
   end
-  test 'techtalktoday endpoint' do
-    get '/api/jupiterbroadcasting/archive/techtalktoday'
+  test 'torked endpoint' do
+    get '/api/jupiterbroadcasting/archive/torked'
     assert_equal 200, last_response.status
   end
   test 'womenstechradio endpoint' do
