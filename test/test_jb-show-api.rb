@@ -42,6 +42,10 @@ scope do
     get '/api/jupiterbroadcasting/archive/fauxshow'
     assert_equal 200, last_response.status
   end
+  test 'jupiter@nite endpoint' do
+    get '/api/jupiterbroadcasting/archive/jupiternite'
+    assert_equal 200, last_response.status
+  end
   test 'scibyte endpoint' do
     get '/api/jupiterbroadcasting/archive/scibyte'
     assert_equal 200, last_response.status
