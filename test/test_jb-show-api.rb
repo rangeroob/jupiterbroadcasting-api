@@ -50,6 +50,10 @@ scope do
     get '/api/jupiterbroadcasting/archive/jupiternite'
     assert_equal 200, last_response.status
   end
+  test 'mmorgue endpoint' do
+    get '/api/jupiterbroadcasting/archive/mmorgue'
+    assert_equal 200, last_response.status
+  end
   test 'scibyte endpoint' do
     get '/api/jupiterbroadcasting/archive/scibyte'
     assert_equal 200, last_response.status
