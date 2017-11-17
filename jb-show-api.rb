@@ -66,6 +66,9 @@ Cuba.define do
           end
         end
         on 'archive' do
+          on 'fauxshow' do
+            run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/FauxShowMP3.xml')
+          end
           on 'scibyte' do
             run ShowAddress.get('http://feeds.feedburner.com/scibyteaudio')
           end
