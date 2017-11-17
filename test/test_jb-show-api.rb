@@ -38,6 +38,10 @@ scope do
     get '/api/jupiterbroadcasting/current/usererror'
     assert_equal 200, last_response.status
   end
+  test 'fauxshow endpoint' do
+    get '/api/jupiterbroadcasting/archive/fauxshow'
+    assert_equal 200, last_response.status
+  end
   test 'scibyte endpoint' do
     get '/api/jupiterbroadcasting/archive/scibyte'
     assert_equal 200, last_response.status
