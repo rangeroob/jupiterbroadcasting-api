@@ -25,6 +25,29 @@ def get(address)
           res.write(pretty_json)
         end
       end
+      on 'length' do
+        get_rss = open(address)
+        pretty_json = JSON.pretty_generate(Hash.from_xml(get_rss))
+        parse_rss = JSON.parse(pretty_json)
+        rss_length = parse_rss.fetch('rss').fetch('channel').fetch('item').to_a
+                              .length
+        res.write(rss_length - 1)
+      end
+      on ':episode' do |episode|
+        begin
+          res.headers['Content-Type'] = 'application/json; charset=utf-8'
+          get_rss = open(address)
+          pretty_json = JSON.pretty_generate(Hash.from_xml(get_rss))
+          parse_rss = JSON.parse(pretty_json)
+          episode_location = parse_rss.fetch('rss').fetch('channel')
+                                      .fetch('item').fetch(episode.to_i)
+                                      .to_s.gsub('=>', ':')
+        rescue IndexError
+          res.status = 500
+        else
+          res.write(episode_location)
+        end
+      end
     end
   end
 end
