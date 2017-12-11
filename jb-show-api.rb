@@ -113,6 +113,9 @@ Cuba.define do
           on 'jupiternite' do
             run ShowAddress.get('http://feeds.feedburner.com/jupiternitemp3')
           end
+          on 'legendofthestonedowl' do
+            run ShowAddress.get('http://feeds.feedburner.com/lotsomp3')
+          end
           on 'mmorgue' do
             run ShowAddress.get('http://feeds.feedburner.com/MMOrgueMP3')
           end
