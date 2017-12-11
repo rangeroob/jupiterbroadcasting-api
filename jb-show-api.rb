@@ -119,6 +119,9 @@ Cuba.define do
           on 'legendofthestonedowl' do
             run ShowAddress.get('http://feeds.feedburner.com/lotsomp3')
           end
+          on 'linuxactionshow' do
+            run ShowAddress.get('http://feeds2.feedburner.com/TheLinuxActionShow')
+          end
           on 'mmorgue' do
             run ShowAddress.get('http://feeds.feedburner.com/MMOrgueMP3')
           end
