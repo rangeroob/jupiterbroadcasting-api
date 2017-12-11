@@ -110,6 +110,9 @@ Cuba.define do
           on 'indepthlook' do
             run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/indepthlookmp3.xml')
           end
+          on 'jointfailures' do
+            run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/jointfailuresmp3.xml')
+          end
           on 'jupiternite' do
             run ShowAddress.get('http://feeds.feedburner.com/jupiternitemp3')
           end
