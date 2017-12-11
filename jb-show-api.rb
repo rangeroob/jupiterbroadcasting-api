@@ -101,9 +101,6 @@ Cuba.define do
           end
         end
         on 'archive' do
-          on 'planb' do
-            run ShowAddress.get('http://feeds.feedburner.com/planbmp3')
-          end
           on 'fauxshow' do
             run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/FauxShowMP3.xml')
           end
@@ -112,6 +109,9 @@ Cuba.define do
           end
           on 'mmorgue' do
             run ShowAddress.get('http://feeds.feedburner.com/MMOrgueMP3')
+          end
+          on 'planb' do
+            run ShowAddress.get('http://feeds.feedburner.com/planbmp3')
           end
           on 'scibyte' do
             run ShowAddress.get('http://feeds.feedburner.com/scibyteaudio')
