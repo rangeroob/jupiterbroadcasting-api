@@ -101,17 +101,32 @@ Cuba.define do
           end
         end
         on 'archive' do
-          on 'planb' do
-            run ShowAddress.get('http://feeds.feedburner.com/planbmp3')
-          end
           on 'fauxshow' do
             run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/FauxShowMP3.xml')
+          end
+          on 'howtolinux' do
+            run ShowAddress.get('http://feeds.feedburner.com/HowToLinuxMp3')
+          end
+          on 'indepthlook' do
+            run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/indepthlookmp3.xml')
+          end
+          on 'jointfailures' do
+            run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/jointfailuresmp3.xml')
           end
           on 'jupiternite' do
             run ShowAddress.get('http://feeds.feedburner.com/jupiternitemp3')
           end
+          on 'legendofthestonedowl' do
+            run ShowAddress.get('http://feeds.feedburner.com/lotsomp3')
+          end
+          on 'linuxactionshow' do
+            run ShowAddress.get('http://feeds2.feedburner.com/TheLinuxActionShow')
+          end
           on 'mmorgue' do
             run ShowAddress.get('http://feeds.feedburner.com/MMOrgueMP3')
+          end
+          on 'planb' do
+            run ShowAddress.get('http://feeds.feedburner.com/planbmp3')
           end
           on 'scibyte' do
             run ShowAddress.get('http://feeds.feedburner.com/scibyteaudio')
