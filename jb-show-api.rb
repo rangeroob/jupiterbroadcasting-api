@@ -104,6 +104,9 @@ Cuba.define do
           on 'fauxshow' do
             run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/FauxShowMP3.xml')
           end
+          on 'howtolinux' do
+            run ShowAddress.get('http://feeds.feedburner.com/HowToLinuxMp3')
+          end
           on 'jupiternite' do
             run ShowAddress.get('http://feeds.feedburner.com/jupiternitemp3')
           end
