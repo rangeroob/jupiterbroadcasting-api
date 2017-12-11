@@ -107,6 +107,9 @@ Cuba.define do
           on 'howtolinux' do
             run ShowAddress.get('http://feeds.feedburner.com/HowToLinuxMp3')
           end
+          on 'indepthlook' do
+            run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/indepthlookmp3.xml')
+          end
           on 'jupiternite' do
             run ShowAddress.get('http://feeds.feedburner.com/jupiternitemp3')
           end
