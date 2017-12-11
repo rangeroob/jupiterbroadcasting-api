@@ -3,8 +3,20 @@ require 'cuba'
 require 'cuba/safe'
 require 'json'
 require 'open-uri'
+require 'rack/cors'
 
 Cuba.plugin Cuba::Safe
+
+Cuba.use Rack::Cors do
+  allow do
+    origins '*'
+
+    resource '/api/*',
+             methods: [:get],
+             headers: [:any],
+             max_age: 0
+  end
+end
 
 class ShowAddress < Cuba; end
 
