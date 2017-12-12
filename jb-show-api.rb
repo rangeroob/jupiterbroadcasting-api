@@ -56,6 +56,8 @@ def get(address)
                                       .to_s.gsub('=>', ':')
         rescue IndexError
           res.status = 500
+          http_error_hash = { status: 'fail', rss: 'failure to retrieve data' }
+          res.write(JSON.pretty_generate(http_error_hash))
         else
           res.write(episode_location)
         end
