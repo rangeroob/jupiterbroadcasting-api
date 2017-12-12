@@ -5,6 +5,8 @@ scope do
   test '404 endpoint' do
     get 'api/jupiterbroadcasting/current/nonexistentshow'
     assert_equal 404, last_response.status
+    get 'api/jupiterbroadcasting/archive/fauxshow/1000'
+    assert_equal 500, last_response.status
   end
 end
 scope do
