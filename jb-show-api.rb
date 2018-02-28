@@ -95,6 +95,9 @@ Cuba.define do
           on 'techsnap' do
             run ShowAddress.get('http://feeds.feedburner.com/techsnapmp3')
           end
+          on 'techtalktoday' do
+            run ShowAddress.get('http://techtalk.today/rss')
+          end
           on 'unfilter' do
             run ShowAddress.get('http://feeds.feedburner.com/jupiterbroadcasting/unfiltermp3')
           end
@@ -135,9 +138,6 @@ Cuba.define do
           end
           on 'stoked' do
             run ShowAddress.get('http://feeds.feedburner.com/stoked?format=xml')
-          end
-          on 'techtalktoday' do
-            run ShowAddress.get('http://feedpress.me/t3mp3')
           end
           on 'torked' do
             run ShowAddress.get('http://feeds.feedburner.com/TorkedMp3')
