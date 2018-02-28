@@ -101,6 +101,19 @@ scope do
   end
 end
 scope do
+  test 'techtalktoday endpoint' do
+    get '/api/jupiterbroadcasting/current/techtalktoday'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/current/techtalktoday/length'
+    assert_equal 200, last_response.status
+    assert_equal 'text/html; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/current/techtalktoday/0'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+  end
+end
+scope do
   test 'unfilter endpoint' do
     get '/api/jupiterbroadcasting/current/unfilter'
     assert_equal 200, last_response.status
@@ -252,19 +265,6 @@ scope do
     assert_equal 200, last_response.status
     assert_equal 'text/html; charset=utf-8', last_response.content_type
     get '/api/jupiterbroadcasting/archive/stoked/0'
-    assert_equal 200, last_response.status
-    assert_equal 'application/json; charset=utf-8', last_response.content_type
-  end
-end
-scope do
-  test 'techtalktoday endpoint' do
-    get '/api/jupiterbroadcasting/archive/techtalktoday'
-    assert_equal 200, last_response.status
-    assert_equal 'application/json; charset=utf-8', last_response.content_type
-    get '/api/jupiterbroadcasting/archive/techtalktoday/length'
-    assert_equal 200, last_response.status
-    assert_equal 'text/html; charset=utf-8', last_response.content_type
-    get '/api/jupiterbroadcasting/archive/techtalktoday/0'
     assert_equal 200, last_response.status
     assert_equal 'application/json; charset=utf-8', last_response.content_type
   end
