@@ -84,7 +84,7 @@ Cuba.define do
             run ShowAddress.get('http://feeds.feedburner.com/BsdNowMp3?format=xml')
           end
           on 'coderradio' do
-            run ShowAddress.get('http://feeds.feedburner.com/coderradiomp3?format=xml')
+            run ShowAddress.get('http://coder.show/rss')
           end
           on 'linuxactionnews' do
             run ShowAddress.get('http://linuxactionnews.com/rss')
