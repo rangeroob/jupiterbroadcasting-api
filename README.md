@@ -52,9 +52,11 @@ rake test
 
 ## Built With
 
- [Cuba](https://github.com/soveran/cuba)
+[Cuba](https://github.com/soveran/cuba)
 
 [Active Support](https://github.com/rails/rails/tree/master/activesupport)
+
+[Rack-Cors](https://github.com/cyu/rack-cors)
 
 ## Tested With
  [Rack-Test](https://github.com/rack-test/rack-test)
