@@ -81,7 +81,7 @@ Cuba.define do
             run ShowAddress.get('http://asknoah.fireside.fm/rss')
           end
           on 'bsdnow' do
-            run ShowAddress.get('http://feeds.feedburner.com/BsdNowMp3?format=xml')
+            run ShowAddress.get('http://feed.jupiter.zone/bsdnow')
           end
           on 'coderradio' do
             run ShowAddress.get('http://coder.show/rss')
