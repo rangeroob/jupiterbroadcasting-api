@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/core_ext/hash'
 require 'cuba'
 require 'cuba/safe'
@@ -78,7 +80,7 @@ Cuba.define do
       on 'jupiterbroadcasting' do
         on 'current' do
           on 'asknoah' do
-            run ShowAddress.get('http://asknoah.fireside.fm/rss')
+            run ShowAddress.get('http://podcast.asknoahshow.com/rss')
           end
           on 'bsdnow' do
             run ShowAddress.get('http://feed.jupiter.zone/bsdnow')
@@ -90,16 +92,16 @@ Cuba.define do
             run ShowAddress.get('http://linuxactionnews.com/rss')
           end
           on 'linuxunplugged' do
-            run ShowAddress.get('http://feeds.feedburner.com/linuxunplugged')
+            run ShowAddress.get('http://linuxunplugged.com/rss')
           end
           on 'techsnap' do
-            run ShowAddress.get('http://feeds.feedburner.com/techsnapmp3')
+            run ShowAddress.get('http://techsnap.systems/rss')
           end
           on 'techtalktoday' do
             run ShowAddress.get('http://techtalk.today/rss')
           end
           on 'unfilter' do
-            run ShowAddress.get('http://feeds.feedburner.com/jupiterbroadcasting/unfiltermp3')
+            run ShowAddress.get('http://unfilter.show/rss')
           end
           on 'usererror' do
             run ShowAddress.get('http://feedpress.me/usererror')
