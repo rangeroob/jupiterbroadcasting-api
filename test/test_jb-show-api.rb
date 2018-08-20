@@ -277,13 +277,13 @@ scope do
 end
 scope do
   test 'unfilter endpoint' do
-    get '/api/jupiterbroadcasting/current/unfilter'
+    get '/api/jupiterbroadcasting/archive/unfilter'
     assert_equal 200, last_response.status
     assert_equal 'application/json; charset=utf-8', last_response.content_type
-    get '/api/jupiterbroadcasting/current/unfilter/length'
+    get '/api/jupiterbroadcasting/archive/unfilter/length'
     assert_equal 200, last_response.status
     assert_equal 'text/html; charset=utf-8', last_response.content_type
-    get '/api/jupiterbroadcasting/current/unfilter/0'
+    get '/api/jupiterbroadcasting/archive/unfilter/0'
     assert_equal 200, last_response.status
     assert_equal 'application/json; charset=utf-8', last_response.content_type
   end
