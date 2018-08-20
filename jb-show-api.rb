@@ -98,9 +98,6 @@ Cuba.define do
           on 'techtalktoday' do
             run ShowAddress.get('http://techtalk.today/rss')
           end
-          on 'unfilter' do
-            run ShowAddress.get('http://feeds.feedburner.com/jupiterbroadcasting/unfiltermp3')
-          end
           on 'usererror' do
             run ShowAddress.get('http://feedpress.me/usererror')
           end
@@ -141,6 +138,9 @@ Cuba.define do
           end
           on 'torked' do
             run ShowAddress.get('http://feeds.feedburner.com/TorkedMp3')
+          end
+          on 'unfilter' do
+            run ShowAddress.get('http://feeds.feedburner.com/jupiterbroadcasting/unfiltermp3')
           end
           on 'womenstechradio' do
             run ShowAddress.get('http://feeds.feedburner.com/wtrmp3?format=xml')
