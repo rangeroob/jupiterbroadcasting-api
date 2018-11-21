@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'cuba/test'
 require_relative '../jb-show-api.rb'
 
