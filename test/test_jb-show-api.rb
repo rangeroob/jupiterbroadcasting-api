@@ -9,6 +9,9 @@ scope do
     assert_equal 500, last_response.status
   end
 end
+
+# Current
+
 scope do
   test 'asknoah endpoint' do
     get '/api/jupiterbroadcasting/current/asknoah'
@@ -114,19 +117,6 @@ scope do
   end
 end
 scope do
-  test 'unfilter endpoint' do
-    get '/api/jupiterbroadcasting/current/unfilter'
-    assert_equal 200, last_response.status
-    assert_equal 'application/json; charset=utf-8', last_response.content_type
-    get '/api/jupiterbroadcasting/current/unfilter/length'
-    assert_equal 200, last_response.status
-    assert_equal 'text/html; charset=utf-8', last_response.content_type
-    get '/api/jupiterbroadcasting/current/unfilter/0'
-    assert_equal 200, last_response.status
-    assert_equal 'application/json; charset=utf-8', last_response.content_type
-  end
-end
-scope do
   test 'usererror endpoint' do
     get '/api/jupiterbroadcasting/current/usererror'
     assert_equal 200, last_response.status
@@ -139,6 +129,9 @@ scope do
     assert_equal 'application/json; charset=utf-8', last_response.content_type
   end
 end
+
+# Archive 
+
 scope do
   test 'fauxshow endpoint' do
     get '/api/jupiterbroadcasting/archive/fauxshow'
@@ -278,6 +271,19 @@ scope do
     assert_equal 200, last_response.status
     assert_equal 'text/html; charset=utf-8', last_response.content_type
     get '/api/jupiterbroadcasting/archive/torked/0'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+  end
+end
+scope do
+  test 'unfilter endpoint' do
+    get '/api/jupiterbroadcasting/archive/unfilter'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/archive/unfilter/length'
+    assert_equal 200, last_response.status
+    assert_equal 'text/html; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/archive/unfilter/0'
     assert_equal 200, last_response.status
     assert_equal 'application/json; charset=utf-8', last_response.content_type
   end
