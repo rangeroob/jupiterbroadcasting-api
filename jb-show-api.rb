@@ -79,9 +79,6 @@ Cuba.define do
     on 'api' do
       on 'jupiterbroadcasting' do
         on 'current' do
-          on 'asknoah' do
-            run ShowAddress.get('http://podcast.asknoahshow.com/rss')
-          end
           on 'bsdnow' do
             run ShowAddress.get('https://bsdnow.fireside.fm/rss')
           end
@@ -96,9 +93,6 @@ Cuba.define do
           end
           on 'techsnap' do
             run ShowAddress.get('http://techsnap.systems/rss')
-          end
-          on 'techtalktoday' do
-            run ShowAddress.get('http://techtalk.today/rss')
           end
           on 'usererror' do
             run ShowAddress.get('http://feedpress.me/usererror')
