@@ -28,6 +28,19 @@ scope do
   end
 end
 scope do
+  test 'chooselinux endpoint' do
+    get '/api/jupiterbroadcasting/current/chooselinux'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/current/chooselinux/length'
+    assert_equal 200, last_response.status
+    assert_equal 'text/html; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/current/chooselinux/0'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+  end
+end
+scope do
   test 'coderradio endpoint' do
     get '/api/jupiterbroadcasting/current/coderradio'
     assert_equal 200, last_response.status

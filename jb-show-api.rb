@@ -85,6 +85,9 @@ Cuba.define do
           on 'coderradio' do
             run ShowAddress.get('http://coder.show/rss')
           end
+          on 'chooselinux' do
+            run ShowAddress.get('http://chooselinux.show/rss')
+          end
           on 'linuxactionnews' do
             run ShowAddress.get('http://linuxactionnews.com/rss')
           end
