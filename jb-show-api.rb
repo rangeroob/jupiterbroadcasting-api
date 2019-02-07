@@ -105,6 +105,9 @@ Cuba.define do
           end
         end
         on 'archive' do
+          on 'asknoah' do
+            run ShowAddress.get('http://podcast.asknoahshow.com/rss')
+          end
           on 'fauxshow' do
             run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/FauxShowMP3.xml')
           end
@@ -137,6 +140,9 @@ Cuba.define do
           end
           on 'stoked' do
             run ShowAddress.get('http://feeds.feedburner.com/stoked?format=xml')
+          end
+          on 'techtalktoday' do
+            run ShowAddress.get('http://techtalk.today/rss')
           end
           on 'torked' do
             run ShowAddress.get('http://feeds.feedburner.com/TorkedMp3')
