@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'cuba/test'
 require_relative '../jb-show-api.rb'
 
 scope do
-  test '404 endpoint' do
+  test '404/500 endpoint' do
     get 'api/jupiterbroadcasting/current/nonexistentshow'
     assert_equal 404, last_response.status
     get 'api/jupiterbroadcasting/archive/fauxshow/1000'
@@ -13,19 +15,6 @@ end
 # Current
 
 scope do
-  test 'asknoah endpoint' do
-    get '/api/jupiterbroadcasting/current/asknoah'
-    assert_equal 200, last_response.status
-    assert_equal 'application/json; charset=utf-8', last_response.content_type
-    get '/api/jupiterbroadcasting/current/asknoah/length'
-    assert_equal 200, last_response.status
-    assert_equal 'text/html; charset=utf-8', last_response.content_type
-    get '/api/jupiterbroadcasting/current/asknoah/0'
-    assert_equal 200, last_response.status
-    assert_equal 'application/json; charset=utf-8', last_response.content_type
-  end
-end
-scope do
   test 'bsdnow endpoint' do
     get '/api/jupiterbroadcasting/current/bsdnow'
     assert_equal 200, last_response.status
@@ -34,6 +23,19 @@ scope do
     assert_equal 200, last_response.status
     assert_equal 'text/html; charset=utf-8', last_response.content_type
     get '/api/jupiterbroadcasting/current/bsdnow/0'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+  end
+end
+scope do
+  test 'chooselinux endpoint' do
+    get '/api/jupiterbroadcasting/current/chooselinux'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/current/chooselinux/length'
+    assert_equal 200, last_response.status
+    assert_equal 'text/html; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/current/chooselinux/0'
     assert_equal 200, last_response.status
     assert_equal 'application/json; charset=utf-8', last_response.content_type
   end
@@ -65,19 +67,6 @@ scope do
   end
 end
 scope do
-  test 'linuxactionshow endpoint' do
-    get '/api/jupiterbroadcasting/archive/linuxactionshow'
-    assert_equal 200, last_response.status
-    assert_equal 'application/json; charset=utf-8', last_response.content_type
-    get '/api/jupiterbroadcasting/archive/linuxactionshow/length'
-    assert_equal 200, last_response.status
-    assert_equal 'text/html; charset=utf-8', last_response.content_type
-    get '/api/jupiterbroadcasting/archive/linuxactionshow/0'
-    assert_equal 200, last_response.status
-    assert_equal 'application/json; charset=utf-8', last_response.content_type
-  end
-end
-scope do
   test 'linuxunplugged endpoint' do
     get '/api/jupiterbroadcasting/current/linuxunplugged'
     assert_equal 200, last_response.status
@@ -104,19 +93,6 @@ scope do
   end
 end
 scope do
-  test 'techtalktoday endpoint' do
-    get '/api/jupiterbroadcasting/current/techtalktoday'
-    assert_equal 200, last_response.status
-    assert_equal 'application/json; charset=utf-8', last_response.content_type
-    get '/api/jupiterbroadcasting/current/techtalktoday/length'
-    assert_equal 200, last_response.status
-    assert_equal 'text/html; charset=utf-8', last_response.content_type
-    get '/api/jupiterbroadcasting/current/techtalktoday/0'
-    assert_equal 200, last_response.status
-    assert_equal 'application/json; charset=utf-8', last_response.content_type
-  end
-end
-scope do
   test 'usererror endpoint' do
     get '/api/jupiterbroadcasting/current/usererror'
     assert_equal 200, last_response.status
@@ -132,6 +108,19 @@ end
 
 # Archive 
 
+scope do
+  test 'asknoah endpoint' do
+    get '/api/jupiterbroadcasting/archive/asknoah'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/archive/asknoah/length'
+    assert_equal 200, last_response.status
+    assert_equal 'text/html; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/archive/asknoah/0'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+  end
+end
 scope do
   test 'fauxshow endpoint' do
     get '/api/jupiterbroadcasting/archive/fauxshow'
@@ -211,6 +200,19 @@ scope do
   end
 end
 scope do
+  test 'linuxactionshow endpoint' do
+    get '/api/jupiterbroadcasting/archive/linuxactionshow'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/archive/linuxactionshow/length'
+    assert_equal 200, last_response.status
+    assert_equal 'text/html; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/archive/linuxactionshow/0'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+  end
+end
+scope do
   test 'mmorgue endpoint' do
     get '/api/jupiterbroadcasting/archive/mmorgue'
     assert_equal 200, last_response.status
@@ -258,6 +260,19 @@ scope do
     assert_equal 200, last_response.status
     assert_equal 'text/html; charset=utf-8', last_response.content_type
     get '/api/jupiterbroadcasting/archive/stoked/0'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+  end
+end
+scope do
+  test 'techtalktoday endpoint' do
+    get '/api/jupiterbroadcasting/archive/techtalktoday'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/archive/techtalktoday/length'
+    assert_equal 200, last_response.status
+    assert_equal 'text/html; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/archive/techtalktoday/0'
     assert_equal 200, last_response.status
     assert_equal 'application/json; charset=utf-8', last_response.content_type
   end

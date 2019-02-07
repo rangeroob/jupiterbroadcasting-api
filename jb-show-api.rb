@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/core_ext/hash'
 require 'cuba'
 require 'cuba/safe'
@@ -77,32 +79,32 @@ Cuba.define do
     on 'api' do
       on 'jupiterbroadcasting' do
         on 'current' do
-          on 'asknoah' do
-            run ShowAddress.get('http://asknoah.fireside.fm/rss')
-          end
           on 'bsdnow' do
-            run ShowAddress.get('http://feed.jupiter.zone/bsdnow')
+            run ShowAddress.get('https://bsdnow.fireside.fm/rss')
           end
           on 'coderradio' do
             run ShowAddress.get('http://coder.show/rss')
+          end
+          on 'chooselinux' do
+            run ShowAddress.get('http://chooselinux.show/rss')
           end
           on 'linuxactionnews' do
             run ShowAddress.get('http://linuxactionnews.com/rss')
           end
           on 'linuxunplugged' do
-            run ShowAddress.get('http://feeds.feedburner.com/linuxunplugged')
+            run ShowAddress.get('http://linuxunplugged.com/rss')
           end
           on 'techsnap' do
-            run ShowAddress.get('http://feeds.feedburner.com/techsnapmp3')
-          end
-          on 'techtalktoday' do
-            run ShowAddress.get('http://techtalk.today/rss')
+            run ShowAddress.get('http://techsnap.systems/rss')
           end
           on 'usererror' do
             run ShowAddress.get('http://feedpress.me/usererror')
           end
         end
         on 'archive' do
+          on 'asknoah' do
+            run ShowAddress.get('http://podcast.asknoahshow.com/rss')
+          end
           on 'fauxshow' do
             run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/FauxShowMP3.xml')
           end
@@ -135,6 +137,9 @@ Cuba.define do
           end
           on 'stoked' do
             run ShowAddress.get('http://feeds.feedburner.com/stoked?format=xml')
+          end
+          on 'techtalktoday' do
+            run ShowAddress.get('http://techtalk.today/rss')
           end
           on 'torked' do
             run ShowAddress.get('http://feeds.feedburner.com/TorkedMp3')
