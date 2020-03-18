@@ -32,8 +32,13 @@ def get(address)
         begin
           get_rss = open(address)
         rescue OpenURI::HTTPError
-          http_error_hash = { status: 'fail', rss: 'failure to retrieve data' }
+          res.status = 404
+          http_error_hash = { status: 'fail', code: 404, rss: 'failure to retrieve data' }
           res.write(JSON.pretty_generate(http_error_hash))
+        rescue IndexError
+          res.status = 500
+          index_error_hash = { status: 'fail', code: 500, rss: 'failure to retrieve data' }
+          res.write(JSON.pretty_generate(index_error_hash))
         else
           pretty_json = JSON.pretty_generate(Hash.from_xml(get_rss))
           res.write(pretty_json)
@@ -45,21 +50,34 @@ def get(address)
         parse_rss = JSON.parse(pretty_json)
         rss_length = parse_rss.fetch('rss').fetch('channel').fetch('item').to_a
                               .length
+      rescue OpenURI::HTTPError
+        res.status = 404
+        http_error_hash = { status: 'fail', code: 404, rss: 'failure to retrieve data' }
+        res.write(JSON.pretty_generate(http_error_hash))
+      rescue IndexError
+        res.status = 500
+        index_error_hash = { status: 'fail', code: 500, rss: 'failure to retrieve data' }
+        res.write(JSON.pretty_generate(index_error_hash))
+      else
         res.write(rss_length - 1)
       end
       on ':episode' do |episode|
+        res.headers['Content-Type'] = 'application/json; charset=utf-8'
         begin
-          res.headers['Content-Type'] = 'application/json; charset=utf-8'
-          get_rss = open(address)
-          pretty_json = JSON.pretty_generate(Hash.from_xml(get_rss))
-          parse_rss = JSON.parse(pretty_json)
-          episode_location = parse_rss.fetch('rss').fetch('channel')
-                                      .fetch('item').fetch(episode.to_i)
-                                      .to_s.gsub('=>', ':')
+        get_rss = open(address)
+        pretty_json = JSON.pretty_generate(Hash.from_xml(get_rss))
+        parse_rss = JSON.parse(pretty_json)
+        episode_location = parse_rss.fetch('rss').fetch('channel')
+                                    .fetch('item').fetch(episode.to_i)
+                                    .to_s.gsub('=>', ':')
+        rescue OpenURI::HTTPError
+          res.status = 404
+          http_error_hash = { status: 'fail', code: 404, rss: 'failure to retrieve data' }
+          res.write(JSON.pretty_generate(http_error_hash))
         rescue IndexError
           res.status = 500
-          http_error_hash = { status: 'fail', rss: 'failure to retrieve data' }
-          res.write(JSON.pretty_generate(http_error_hash))
+          index_error_hash = { status: 'fail', code: 500, rss: 'failure to retrieve data' }
+          res.write(JSON.pretty_generate(index_error_hash))
         else
           res.write(episode_location)
         end
@@ -81,9 +99,6 @@ Cuba.define do
         on 'current' do
           on 'bsdnow' do
             run ShowAddress.get('https://bsdnow.fireside.fm/rss')
-          end
-          on 'coderradio' do
-            run ShowAddress.get('http://coder.show/rss')
           end
           on 'chooselinux' do
             run ShowAddress.get('http://chooselinux.show/rss')
