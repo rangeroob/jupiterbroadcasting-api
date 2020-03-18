@@ -41,19 +41,6 @@ scope do
   end
 end
 scope do
-  test 'coderradio endpoint' do
-    get '/api/jupiterbroadcasting/current/coderradio'
-    assert_equal 200, last_response.status
-    assert_equal 'application/json; charset=utf-8', last_response.content_type
-    get '/api/jupiterbroadcasting/current/coderradio/length'
-    assert_equal 200, last_response.status
-    assert_equal 'text/html; charset=utf-8', last_response.content_type
-    get '/api/jupiterbroadcasting/current/coderradio/0'
-    assert_equal 200, last_response.status
-    assert_equal 'application/json; charset=utf-8', last_response.content_type
-  end
-end
-scope do
   test 'linuxactionnews endpoint' do
     get '/api/jupiterbroadcasting/current/linuxactionnews'
     assert_equal 200, last_response.status
@@ -75,6 +62,19 @@ scope do
     assert_equal 200, last_response.status
     assert_equal 'text/html; charset=utf-8', last_response.content_type
     get '/api/jupiterbroadcasting/current/linuxunplugged/0'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+  end
+end
+scope do
+  test 'selfhosted endpoint' do
+    get '/api/jupiterbroadcasting/current/selfhosted'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/current/selfhosted/length'
+    assert_equal 200, last_response.status
+    assert_equal 'text/html; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/current/selfhosted/0'
     assert_equal 200, last_response.status
     assert_equal 'application/json; charset=utf-8', last_response.content_type
   end
@@ -106,7 +106,7 @@ scope do
   end
 end
 
-# Archive 
+# Archive
 
 scope do
   test 'asknoah endpoint' do
@@ -117,6 +117,19 @@ scope do
     assert_equal 200, last_response.status
     assert_equal 'text/html; charset=utf-8', last_response.content_type
     get '/api/jupiterbroadcasting/archive/asknoah/0'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+  end
+end
+scope do
+  test 'coderradio endpoint' do
+    get '/api/jupiterbroadcasting/archive/coderradio'
+    assert_equal 200, last_response.status
+    assert_equal 'application/json; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/archive/coderradio/length'
+    assert_equal 200, last_response.status
+    assert_equal 'text/html; charset=utf-8', last_response.content_type
+    get '/api/jupiterbroadcasting/archive/coderradio/0'
     assert_equal 200, last_response.status
     assert_equal 'application/json; charset=utf-8', last_response.content_type
   end
