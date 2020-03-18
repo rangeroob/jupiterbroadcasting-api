@@ -94,6 +94,9 @@ Cuba.define do
           on 'linuxunplugged' do
             run ShowAddress.get('http://linuxunplugged.com/rss')
           end
+          on 'selfhosted' do
+            run ShowAddress.get('http://feeds.fireside.fm/selfhosted/rss')
+          end
           on 'techsnap' do
             run ShowAddress.get('http://techsnap.systems/rss')
           end
@@ -104,6 +107,9 @@ Cuba.define do
         on 'archive' do
           on 'asknoah' do
             run ShowAddress.get('http://podcast.asknoahshow.com/rss')
+          end
+          on 'coderradio' do
+            run ShowAddress.get('http://coder.show/rss')
           end
           on 'fauxshow' do
             run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/FauxShowMP3.xml')
