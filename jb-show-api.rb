@@ -24,63 +24,128 @@ class ShowAddress < Cuba; end
 
 public
 
-def get(address)
+def get_coderradio(address)
   ShowAddress.define do
     on get do
       on root do
-        res.headers['Content-Type'] = 'application/json; charset=utf-8'
-        begin
-          get_rss = open(address)
-        rescue OpenURI::HTTPError
-          res.status = 404
-          http_error_hash = { status: 'fail', code: 404, rss: 'failure to retrieve data' }
-          res.write(JSON.pretty_generate(http_error_hash))
-        rescue IndexError
-          res.status = 500
-          index_error_hash = { status: 'fail', code: 500, rss: 'failure to retrieve data' }
-          res.write(JSON.pretty_generate(index_error_hash))
-        else
-          pretty_json = JSON.pretty_generate(Hash.from_xml(get_rss))
-          res.write(pretty_json)
-        end
-      end
-      on 'length' do
         get_rss = open(address)
-        pretty_json = JSON.pretty_generate(Hash.from_xml(get_rss))
-        parse_rss = JSON.parse(pretty_json)
-        rss_length = parse_rss.fetch('rss').fetch('channel').fetch('item').to_a
-                              .length
       rescue OpenURI::HTTPError
         res.status = 404
         http_error_hash = { status: 'fail', code: 404, rss: 'failure to retrieve data' }
-        res.write(JSON.pretty_generate(http_error_hash))
+        res.json(JSON.pretty_generate(http_error_hash))
       rescue IndexError
         res.status = 500
         index_error_hash = { status: 'fail', code: 500, rss: 'failure to retrieve data' }
-        res.write(JSON.pretty_generate(index_error_hash))
+        res.json(JSON.pretty_generate(index_error_hash))
       else
-        res.write(rss_length - 1)
+        pretty_json = JSON.pretty_generate(Hash.from_xml(get_rss))
+        res.json(pretty_json)
       end
       on ':episode' do |episode|
-        res.headers['Content-Type'] = 'application/json; charset=utf-8'
-        begin
+        http_error_hash = { status: 'fail', code: 404, rss: 'failure to retrieve data' }
+        json_http_error = JSON.pretty_generate(http_error_hash).to_s
+        json_http_error_array = Array.new(55, json_http_error)
         get_rss = open(address)
         pretty_json = JSON.pretty_generate(Hash.from_xml(get_rss))
         parse_rss = JSON.parse(pretty_json)
         episode_location = parse_rss.fetch('rss').fetch('channel')
-                                    .fetch('item').fetch(episode.to_i)
+                                    .fetch('item')
+                                    .reverse
+                                    .unshift(*json_http_error_array)
+                                    .fetch(episode.to_i)
                                     .to_s.gsub('=>', ':')
-        rescue OpenURI::HTTPError
-          res.status = 404
-          http_error_hash = { status: 'fail', code: 404, rss: 'failure to retrieve data' }
-          res.write(JSON.pretty_generate(http_error_hash))
-        rescue IndexError
-          res.status = 500
-          index_error_hash = { status: 'fail', code: 500, rss: 'failure to retrieve data' }
-          res.write(JSON.pretty_generate(index_error_hash))
-        else
-          res.write(episode_location)
-        end
+      rescue OpenURI::HTTPError
+        res.status = 404
+        res.json(JSON.pretty_generate(http_error_hash))
+      rescue IndexError
+        res.status = 500
+        index_error_hash = { status: 'fail', code: 500, rss: 'failure to retrieve data' }
+        res.json(JSON.pretty_generate(index_error_hash))
+      else
+        res.json(episode_location)
+      end
+    end
+  end
+end
+
+def get_linuxunplugged(address)
+  ShowAddress.define do
+    on get do
+      on root do
+        get_rss = open(address)
+      rescue OpenURI::HTTPError
+        res.status = 404
+        http_error_hash = { status: 'fail', code: 404, rss: 'failure to retrieve data' }
+        res.json(JSON.pretty_generate(http_error_hash))
+      rescue IndexError
+        res.status = 500
+        index_error_hash = { status: 'fail', code: 500, rss: 'failure to retrieve data' }
+        res.json(JSON.pretty_generate(index_error_hash))
+      else
+        pretty_json = JSON.pretty_generate(Hash.from_xml(get_rss))
+        res.json(pretty_json)
+      end
+      on ':episode' do |episode|
+        http_error_hash = { status: 'fail', code: 404, rss: 'failure to retrieve data' }
+        json_http_error = JSON.pretty_generate(http_error_hash).to_s
+        get_rss = open(address)
+        pretty_json = JSON.pretty_generate(Hash.from_xml(get_rss))
+        parse_rss = JSON.parse(pretty_json)
+        episode_location = parse_rss.fetch('rss').fetch('channel')
+                                    .fetch('item')
+                                    .reverse.unshift(json_http_error)
+                                    .fetch(episode.to_i)
+                                    .to_s.gsub('=>', ':')
+      rescue OpenURI::HTTPError
+        res.status = 404
+        res.json(JSON.pretty_generate(http_error_hash))
+      rescue IndexError
+        res.status = 500
+        index_error_hash = { status: 'fail', code: 500, rss: 'failure to retrieve data' }
+        res.json(JSON.pretty_generate(index_error_hash))
+      else
+        res.json(episode_location)
+      end
+    end
+  end
+end
+
+def get_selfhosted_and_linuxactionnews(address)
+  ShowAddress.define do
+    on get do
+      on root do
+        get_rss = open(address)
+      rescue OpenURI::HTTPError
+        res.status = 404
+        http_error_hash = { status: 'fail', code: 404, rss: 'failure to retrieve data' }
+        res.json(JSON.pretty_generate(http_error_hash))
+      rescue IndexError
+        res.status = 500
+        index_error_hash = { status: 'fail', code: 500, rss: 'failure to retrieve data' }
+        res.json(JSON.pretty_generate(index_error_hash))
+      else
+        pretty_json = JSON.pretty_generate(Hash.from_xml(get_rss))
+        res.json(pretty_json)
+      end
+      on ':episode' do |episode|
+        http_error_hash = { status: 'fail', code: 404, rss: 'failure to retrieve data' }
+        get_rss = open(address)
+        pretty_json = JSON.pretty_generate(Hash.from_xml(get_rss))
+        parse_rss = JSON.parse(pretty_json)
+        episode_location = parse_rss.fetch('rss').fetch('channel')
+                                    .fetch('item')
+                                    .reverse
+                                    .fetch(episode.to_i)
+                                    .to_s.gsub('=>', ':')
+      rescue OpenURI::HTTPError
+        res.status = 404
+        res.json(JSON.pretty_generate(http_error_hash))
+      rescue IndexError
+        res.status = 500
+        index_error_hash = { status: 'fail', code: 500, rss: 'failure to retrieve data' }
+        res.json(JSON.pretty_generate(index_error_hash))
+      else
+        res.json(episode_location)
       end
     end
   end
@@ -96,81 +161,17 @@ Cuba.define do
   on get do
     on 'api' do
       on 'jupiterbroadcasting' do
-        on 'current' do
-          on 'bsdnow' do
-            run ShowAddress.get('https://bsdnow.fireside.fm/rss')
-          end
-          on 'chooselinux' do
-            run ShowAddress.get('http://chooselinux.show/rss')
-          end
-          on 'linuxactionnews' do
-            run ShowAddress.get('http://linuxactionnews.com/rss')
-          end
-          on 'linuxunplugged' do
-            run ShowAddress.get('http://linuxunplugged.com/rss')
-          end
-          on 'selfhosted' do
-            run ShowAddress.get('http://feeds.fireside.fm/selfhosted/rss')
-          end
-          on 'techsnap' do
-            run ShowAddress.get('http://techsnap.systems/rss')
-          end
-          on 'usererror' do
-            run ShowAddress.get('http://feedpress.me/usererror')
-          end
+        on 'coderradio' do
+          run ShowAddress.get_coderradio('https://coder.show/rss')
         end
-        on 'archive' do
-          on 'asknoah' do
-            run ShowAddress.get('http://podcast.asknoahshow.com/rss')
-          end
-          on 'coderradio' do
-            run ShowAddress.get('http://coder.show/rss')
-          end
-          on 'fauxshow' do
-            run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/FauxShowMP3.xml')
-          end
-          on 'howtolinux' do
-            run ShowAddress.get('http://feeds.feedburner.com/HowToLinuxMp3')
-          end
-          on 'indepthlook' do
-            run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/indepthlookmp3.xml')
-          end
-          on 'jointfailures' do
-            run ShowAddress.get('http://www.jupiterbroadcasting.com/feeds/jointfailuresmp3.xml')
-          end
-          on 'jupiternite' do
-            run ShowAddress.get('http://feeds.feedburner.com/jupiternitemp3')
-          end
-          on 'legendofthestonedowl' do
-            run ShowAddress.get('http://feeds.feedburner.com/lotsomp3')
-          end
-          on 'linuxactionshow' do
-            run ShowAddress.get('http://feeds2.feedburner.com/TheLinuxActionShow')
-          end
-          on 'mmorgue' do
-            run ShowAddress.get('http://feeds.feedburner.com/MMOrgueMP3')
-          end
-          on 'planb' do
-            run ShowAddress.get('http://feeds.feedburner.com/planbmp3')
-          end
-          on 'scibyte' do
-            run ShowAddress.get('http://feeds.feedburner.com/scibyteaudio')
-          end
-          on 'stoked' do
-            run ShowAddress.get('http://feeds.feedburner.com/stoked?format=xml')
-          end
-          on 'techtalktoday' do
-            run ShowAddress.get('http://techtalk.today/rss')
-          end
-          on 'torked' do
-            run ShowAddress.get('http://feeds.feedburner.com/TorkedMp3')
-          end
-          on 'unfilter' do
-            run ShowAddress.get('http://feeds.feedburner.com/jupiterbroadcasting/unfiltermp3')
-          end
-          on 'womenstechradio' do
-            run ShowAddress.get('http://feeds.feedburner.com/wtrmp3?format=xml')
-          end
+        on 'linuxactionnews' do
+          run ShowAddress.get_selfhosted_and_linuxactionnews('https://linuxactionnews.com/rss')
+        end
+        on 'linuxunplugged' do
+          run ShowAddress.get_linuxunplugged('https://linuxunplugged.com/rss')
+        end
+        on 'selfhosted' do
+          run ShowAddress.get_selfhosted_and_linuxactionnews('https://feeds.fireside.fm/selfhosted/rss')
         end
       end
     end
