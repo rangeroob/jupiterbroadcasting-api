@@ -1,52 +1,49 @@
-# Jupiterbroadcasting-api
+# Jupiterbroadcasting Api
 
 An API that interfaces with Jupiterbroadcasting's RSS feeds and converts them into JSON for easy consumption.
-It can be reached at ``` www.jupitercolony.rocks/api/jupiterbroadcasting/[current]or[archive]/[showname]```
+It can be reached at `` `https://www.jupitercolony.rocks/api/jupiterbroadcasting/[showname]` ``
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```ruby
-gem install bundler
-```
-
 ### Installing
 
 First clone this repository
-```bash
+
+``` bash
 git clone https://github.com/rangeroob/jupiterbroadcasting-api.git
 ```
 
 Next change current directory
-```bash
+
+``` bash
 cd jupiterbroadcastin-api
 ```
 
 Then install all dependencies
-```ruby
+
+``` ruby
 bundle install
 ```
 
 After that run rackup
-```ruby
+
+``` ruby
 rackup
 ```
 
 Lastly go to localhost:9292 ex:
-```bash
-curl localhost:9292/api/jupiterbroadcasting/current/bsdnow
+
+``` bash
+curl localhost:9292/api/jupiterbroadcasting/coderradio
 ```
 
-Will give you json output of the bsdnow rss feed
+Will give you json output of the coder radio rss feed
 
 ## Running the tests
 
-```ruby
+``` ruby
 rake test
 ```
 
@@ -59,8 +56,9 @@ rake test
 [Rack-Cors](https://github.com/cyu/rack-cors)
 
 ## Tested With
+
  [Rack-Test](https://github.com/rack-test/rack-test)
- 
+
  [Cutest](https://github.com/djanowski/cutest)
 
 ## Versioning
