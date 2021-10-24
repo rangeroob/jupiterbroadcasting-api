@@ -1,4 +1,6 @@
-# Jupiterbroadcasting Api
+# Archived 
+
+## Jupiterbroadcasting Api
 
 An API that interfaces with Jupiterbroadcasting's RSS feeds and converts them into JSON for easy consumption.
 It can be reached at `` `https://www.jupitercolony.rocks/api/jupiterbroadcasting/[showname]` ``
